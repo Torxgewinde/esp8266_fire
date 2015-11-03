@@ -60,13 +60,6 @@ uint8_t qadd8( uint8_t i, uint8_t j) {
     return t;
 }
 
-RgbColor LinearBlend(RgbColor left, RgbColor right, uint8_t progress)
-{
-  return RgbColor( left.R + ((right.R - left.R) * progress / 255),
-    left.G + ((right.G - left.G) * progress / 255),
-    left.B + ((right.B - left.B) * progress / 255));
-}
-
 typedef struct {RgbColor color; uint8_t fulcrum;} COLOR_AND_FULCRUM;
 
 RgbColor HeatColor(uint8_t temperature)
@@ -112,7 +105,9 @@ RgbColor HeatColor(uint8_t temperature)
                  ", Right fulcrum: " + String(fireColors[i].fulcrum) +\
                  ", blend: " + String((temperature - fireColors[i-1].fulcrum) * 255/(fireColors[i].fulcrum - fireColors[i-1].fulcrum)) + "\n");
     */
-    return LinearBlend(fireColors[i-1].color, fireColors[i].color, (temperature - fireColors[i-1].fulcrum) * 255/(fireColors[i].fulcrum - fireColors[i-1].fulcrum));
+    return RgbColor::LinearBlend(fireColors[i-1].color, \
+                                 fireColors[i].color, \
+                                 ((temperature - fireColors[i-1].fulcrum) * 255/(fireColors[i].fulcrum - fireColors[i-1].fulcrum))/255.0);
 }
 
 void Fire2015(int cooling, int min_heat, int max_heat) {
