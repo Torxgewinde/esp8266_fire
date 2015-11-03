@@ -8,9 +8,12 @@
  */
 
 #include <NeoPixelBus.h>
+#include <Ticker.h>
 
 #define NUM_LEDS 8
 NeoPixelBus strip = NeoPixelBus(NUM_LEDS, 0);
+
+Ticker timer;
     
 void setup() {
   Serial.begin(115200);
@@ -19,13 +22,19 @@ void setup() {
   // this resets all the neopixels to an off state
   strip.Begin();
   strip.Show();
+
+  // setup the animation as timer (Ticker)
+  // create a new frame every 0.05 seconds
+  timer.attach(0.05, timer_tick);
 }
 
+void timer_tick() {
+  Fire2015(40, 14, 25); // run simulation frame   
+  strip.Show();  
+}
 
 void loop() {
-  Fire2015(40, 14, 25); // run simulation frame   
-  strip.Show();
-  delay(50);
+  delay(1000);
 }
 
 // Fire2015 is derived from Fire2012
