@@ -14,8 +14,13 @@
 #define NUM_LEDS 8
 NeoPixelBus strip = NeoPixelBus(NUM_LEDS, 0);
 
+#define max(a,b) ((a)>(b)?(a):(b))
+#define min(a,b) ((a)<(b)?(a):(b))
+
 Ticker timer;
-    
+
+int g_cool=40, g_low=14, g_high=25;
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Compiled at Time: " __TIME__ " Date: " __DATE__);
@@ -27,15 +32,20 @@ void setup() {
   // setup the animation as timer (Ticker)
   // create a new frame every 0.05 seconds
   timer.attach(0.05, timer_tick);
+
+  // call wifi setup
+  setup_wifi();
+
+  delay(100);
 }
 
 void timer_tick() {
-  Fire2015(40, 14, 25); // run simulation frame   
-  strip.Show();  
+  Fire2015(g_cool, g_low, g_high); 
+  strip.Show();
 }
 
 void loop() {
-  delay(1000);
+  loop_wifi();
 }
 
 // Fire2015 is derived from Fire2012
@@ -55,8 +65,6 @@ void loop() {
 //     The heat-to-color mapping uses a black-body radiation approximation.
 //
 // Temperature is in arbitrary units from 0 (cold black) to 255 (white hot).
-
-#define max(a,b) ((a)>(b)?(a):(b))
 
 uint8_t qsub8( uint8_t i, uint8_t j) {
   int t = i - j;
@@ -143,6 +151,5 @@ void Fire2015(int cooling, int min_heat, int max_heat) {
     strip.SetPixelColor(j, color);
   }
 }
-
 
 
