@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<title>Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      $("#cvalue").text("it works...");
+    });
+  </script>
+  
+</head>
+
+<body>
+  <div id="page1" data-role="page">
+    <div data-role="header">
+      <h1 id="title">LED Control</h1>
+	  <div data-role="navbar">
+        <ul>
+          <li><a href="#page1" data-transition="fade" data-icon="home">Home</a></li>
+          <li><a href="#page2" data-transition="fade" data-icon="star">Config</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div data-role="content">
+      <div id="cvalue">...</div>
+    </div>
+	
+    <div data-role="footer" data-position="fixed">
+    -
+    </div>
+  </div>
+  
+  <div id="page2" data-role="page">
+    <div data-role="header">
+      <h1 id="title">Config</h1>
+	  <div data-role="navbar">
+        <ul>
+          <li><a href="#page1" data-transition="fade" data-icon="home">Home</a></li>
+          <li><a href="#page2" data-transition="fade" data-icon="star">Config</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div data-role="content">
+      <p>config goes here</p>
+    </div>
+	
+    <div data-role="footer" data-position="fixed">
+    -
+    </div>
+  </div>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ NeoPixelBus strip = NeoPixelBus(NUM_LEDS, 0);
 
 Ticker timer;
 
-int g_cool=40, g_low=14, g_high=25;
+extern int g_cool, g_low, g_high;
 
 void setup() {
   Serial.begin(115200);
@@ -33,8 +33,9 @@ void setup() {
   // create a new frame every 0.05 seconds
   timer.attach(0.05, timer_tick);
 
-  // call wifi setup
+  // call setups of sother modules
   setup_wifi();
+  setup_webserver();
 
   delay(100);
 }
@@ -46,6 +47,7 @@ void timer_tick() {
 
 void loop() {
   loop_wifi();
+  loop_webserver();
 }
 
 // Fire2015 is derived from Fire2012

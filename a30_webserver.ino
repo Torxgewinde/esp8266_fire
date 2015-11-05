@@ -1,10 +1,5 @@
-#include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
 #include <ESP8266WebServer.h>
-
-/* Set these to your desired credentials. */
-const char *ssid = "LED Laterne #1";
-const char *password = "espespesp";
 
 ESP8266WebServer server(80);
 
@@ -12,12 +7,7 @@ void handleRoot() {
   server.send(200, "text/html", "<h1>You are connected</h1>");
 }
 
-void setup_wifi() {
-  WiFi.softAP(ssid, password);
-
-  IPAddress myIP = WiFi.softAPIP();
-  Serial.print("AP IP address: ");
-  Serial.println(myIP);
+void setup_webserver() {
   server.on("/", handleRoot);
 
   server.on("/defaults", [](){
@@ -68,9 +58,9 @@ void setup_wifi() {
   });
   
   server.begin();
-  Serial.println("HTTP server started");  
+  Serial.println("HTTP server started");
 }
 
-void loop_wifi() {
+void loop_webserver() {
   server.handleClient();
 }
