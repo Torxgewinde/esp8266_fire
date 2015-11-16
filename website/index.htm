@@ -1,59 +1,129 @@
 <!doctype html>
 <html>
 <head>
-<title>Test</title>
+  <title>Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <link rel="stylesheet" type="text/css" href="spectrum.css">
+
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  
+
+  <script type="text/javascript" src="spectrum.js"></script>
   <script type="text/javascript">
     $( document ).ready(function() {
-      $("#cvalue").text("it works...");
-    });
+	  $("#flat").spectrum({
+        flat: true,
+        showInput: false,
+		preferredFormat: "rgb",
+		move: function(color) {
+		  $("#cvalue").text(color.toHexString());
+        }
+      });
+	});
+
   </script>
-  
 </head>
 
 <body>
-  <div id="page1" data-role="page">
+
+  <!-- Fire Effect Settings -->
+
+  <div id="fireeffect" data-role="page">
     <div data-role="header">
-      <h1 id="title">LED Control</h1>
+      <h1 id="title">Fire Effect</h1>
 	  <div data-role="navbar">
         <ul>
-          <li><a href="#page1" data-transition="fade" data-icon="home">Home</a></li>
-          <li><a href="#page2" data-transition="fade" data-icon="star">Config</a></li>
+          <li><a href="#fireeffect" data-transition="fade" data-icon="home">Fire Effect</a></li>
+		  <li><a href="#staticcolor" data-transition="fade" data-icon="star">Static Color</a></li>
+          <li><a href="#config" data-transition="fade" data-icon="star">Config</a></li>
         </ul>
       </div>
     </div>
-  
+
     <div data-role="content">
-      <div id="cvalue">...</div>
+	  <form action="set" method="get">
+	    <label for="cool">Cooling:</label>
+	    <input type="range" name="cool" id="cool" value="60" min="0" max="255" />
+	    <div data-role="rangeslider">
+  		<label for="min">Heat to add:</label>
+  		<input name="min" id="min" min="0" max="255" value="15" type="range" />
+  		<label for="max">Heat to add:</label>
+  		<input name="max" id="max" min="0" max="255" value="50" type="range" />
+	    </div>
+	  </form>
     </div>
-	
+
     <div data-role="footer" data-position="fixed">
-    -123
+      <h4>::</h4>
     </div>
   </div>
-  
-  <div id="page2" data-role="page">
+
+  <!-- Static Color Page -->
+
+  <div id="staticcolor" data-role="page">
+    <div data-role="header">
+      <h1 id="title">Static Color</h1>
+	  <div data-role="navbar">
+        <ul>
+          <li><a href="#fireeffect" data-transition="fade" data-icon="home">Fire Effect</a></li>
+		  <li><a href="#staticcolor" data-transition="fade" data-icon="star">Static Color</a></li>
+          <li><a href="#config" data-transition="fade" data-icon="star">Config</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-role="content">
+      <div id="cvalue">Color Value</div>
+	  <form><input type='text' id="flat" /></form>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+      <h4>::</h4>
+    </div>
+  </div>
+
+  <!-- Config Page -->
+
+  <div id="config" data-role="page">
     <div data-role="header">
       <h1 id="title">Config</h1>
 	  <div data-role="navbar">
         <ul>
-          <li><a href="#page1" data-transition="fade" data-icon="home">Home</a></li>
-          <li><a href="#page2" data-transition="fade" data-icon="star">Config</a></li>
+          <li><a href="#fireeffect" data-transition="fade" data-icon="home">Fire Effect</a></li>
+		  <li><a href="#staticcolor" data-transition="fade" data-icon="star">Static Color</a></li>
+          <li><a href="#config" data-transition="fade" data-icon="star">Config</a></li>
         </ul>
       </div>
     </div>
-  
+
     <div data-role="content">
-      <p>config goes here</p>
+      <form>
+	    <div data-role="fieldcontain">
+			<fieldset data-role="controlgroup">
+				<legend>Operating mode:</legend>
+				<input type="radio" name="wifimode" id="wifimode-1" value="ap" checked="checked" />
+				<label for="wifimode-1">Accesspoint</label>
+
+				<input type="radio" name="wifimode" id="wifimode-2" value="client" />
+				<label for="wifimode-2">Client</label>
+			</fieldset>
+
+			<div data-role="fieldcontain">
+				<label for="ssid">WiFi network name:</label>
+				<input type="text" name="ssid" id="ssid" value="SSID"  />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="ssid">Password:</label>
+				<input type="password" name="pass" id="pass" value="pass"  />
+			</div>
+		</div>
+	  </form>
     </div>
-	
+
     <div data-role="footer" data-position="fixed">
-    -
+      <h4>::</h4>
     </div>
   </div>
 </body>
