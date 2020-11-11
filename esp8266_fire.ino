@@ -12,7 +12,7 @@
 #include <Ticker.h>
 
 #define NUM_LEDS 8
-NeoPixelBus strip = NeoPixelBus(NUM_LEDS, 0);
+NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip(NUM_LEDS, 0);
 
 #define max(a,b) ((a)>(b)?(a):(b))
 #define min(a,b) ((a)<(b)?(a):(b))
@@ -41,7 +41,7 @@ void setup() {
 }
 
 void timer_tick() {
-  Fire2015(g_cool, g_low, g_high); 
+  Fire2015(g_cool, g_low, g_high);
   strip.Show();
 }
 
@@ -153,5 +153,4 @@ void Fire2015(int cooling, int min_heat, int max_heat) {
     strip.SetPixelColor(j, color);
   }
 }
-
 
